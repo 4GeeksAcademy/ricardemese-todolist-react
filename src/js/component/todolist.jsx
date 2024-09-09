@@ -11,10 +11,9 @@ export const TodoList = () => {
     const getPublications = async () => {
         const uri = `${host}/users/${user}`;
         const response = await fetch(uri);
-        if (!response.ok) console.log(response.status);
+        if (!response.ok) createUser()
         const data = await response.json();
         console.log(data.todos);
-
         setTodoList(data.todos);
     }
 
@@ -47,6 +46,17 @@ export const TodoList = () => {
         const response = await fetch(uri, options);
         if (!response.ok) return;
         getPublications();
+    }
+
+    const createUser = async () => {
+        const uri = `${host}/users/${user}`
+        const options = {
+            method: 'POST'
+        }
+        const response = await fetch(uri, options)
+        if (!response.ok) return console.log(response)
+        getPublications()
+
     }
 
     useEffect(() => {

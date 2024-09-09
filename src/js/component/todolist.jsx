@@ -12,10 +12,9 @@ export const TodoList = () => {
     const getPublications = async () => {
         const uri = `${host}/users/${user}`;
         const response = await fetch(uri);
-        if (!response.ok) console.log(response.status);
+        if (!response.ok) createUser()
         const data = await response.json();
         console.log(data.todos);
-
         setTodoList(data.todos);
     }
 
@@ -90,8 +89,6 @@ export const TodoList = () => {
             console.log('Error al eliminar la tarea', error);
         }
     }
-
-
 
     useEffect(() => {
         getPublications();
